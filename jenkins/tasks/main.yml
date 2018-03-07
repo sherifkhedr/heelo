@@ -1,0 +1,17 @@
+---
+# tasks file for jenkins
+- name: Add Jenkins Key
+  become: yes
+  apt_key: url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key state=present
+  
+- name: Add Jenkins repo
+  become: yes
+  apt_repository: repo='deb http://pkg.jenkins-ci.org/debiani binary/' state=present update_cache=yes 
+
+- name: Install Jenkins
+  become: yes
+  apt: name=jenkins state=present
+
+- name: statrt jenkins
+  become: yes
+  service : name=jenkins state=started
